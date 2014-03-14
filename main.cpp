@@ -5,9 +5,43 @@
 #include "z3ann.hpp"
 #include "Z3SolutionConverter.hpp"
 #include "BackendC.hpp"
+#include "Frontend.hpp"
+
+void diabetesTest(void)
+{
+    Frontend fe;
+    if (!fe.loadDataFromFile("testfiles/diabetes.train"))
+        return;
+    std::cout << "File succesfully loaded" << std::endl;
+
+    //FIXME create auto finder hidden layer size
+    z3ann ann(8, 2, 2, -1, 1);
+    ann.setAllLink(false);
+    ann.setSelfLink(false);
+    // ann.setRangeLink(0, 7, 8, 11, true);
+    // ann.setRangeLink(8, 11, 12, 13, true);
+    ann.setRangeLink(0, 7, 8, 9, true);
+    ann.setRangeLink(8, 9, 10, 11, true);
+
+    // I1
+    // ann.setLink(0, 13, false);
+    // ann.setLink(0, 14, false);
+    // ann.setLink(0, 4, true);
+
+    // ann.setAllLink(true);
+    ann.loadTrainingDataSet(fe.getData());
+    ann.solve();
+
+
+    std::cout << "========= C Backend Output ==========" << std::endl;
+    BackendC output(ann);
+    std::cout << output.getOutput();
+}
 
 int main()
 {
+    diabetesTest();
+    return 0;
     std::cout << "+-------------------------------+" << std::endl;
     std::cout << "|          XOR example          |" << std::endl;
     std::cout << "+-------------------------------+" << std::endl;
@@ -85,5 +119,6 @@ int main()
     std::cout << "========= C Backend Output ==========" << std::endl;
     BackendC output(ann);
     std::cout << output.getOutput();
+
     return 0;
 }

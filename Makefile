@@ -4,7 +4,8 @@ CXX	=	clang++
 
 SRC	=	main.cpp \
 		z3ann.cpp \
-		BackendC.cpp
+		BackendC.cpp \
+		Frontend.cpp
 
 OBJ	=	$(SRC:.cpp=.o)
 

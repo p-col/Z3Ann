@@ -30,6 +30,26 @@ public:
         setAll(true);
     }
 
+    void setSelfLink(bool enabled)
+    {
+        int i;
+
+        for (i = 0; i < _sizeEdge; ++i)
+            _linkTable[i][i] = enabled;
+    }
+
+    void setRangeLink(int start1, int end1,
+                      int start2, int end2,
+                      bool enabled)
+    {
+        int i;
+        int j;
+
+        for (i = start1; i <= end1; ++i)
+            for (j = start2; j <= end2; ++j)
+                _linkTable[i][j] = enabled;        
+    }
+
     void setAll(bool enabled)
     {
         int i;
@@ -455,6 +475,9 @@ public:
     bool loadTrainingDataSet(const std::vector<trainingData> &data);
     bool setLink(int from, int to, bool enabled);
     void setAllLink(bool enabled);
+    void setRangeLink(int start1, int end1, int start2, int end2, bool enabled)
+    {_linkTable.setRangeLink(start1, end1, start2, end2, enabled);}
+    void setSelfLink(bool enabled) {_linkTable.setSelfLink(enabled);}
     bool solve(void);
 };
 
