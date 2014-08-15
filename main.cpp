@@ -10,8 +10,11 @@
 void diabetesTest(void)
 {
     Frontend fe;
-    if (!fe.loadDataFromFile("testfiles/diabetes.train"))
+    if (!fe.loadDataFromFile("testfiles/diabietes2.train"))
+      {
+	std::cerr << "File not found." << std::endl;
         return;
+      }
     std::cout << "File succesfully loaded" << std::endl;
 
     //FIXME create auto finder hidden layer size
@@ -40,8 +43,8 @@ void diabetesTest(void)
 
 int main()
 {
-    diabetesTest();
-    return 0;
+    // diabetesTest();
+    // return 0;
     std::cout << "+-------------------------------+" << std::endl;
     std::cout << "|          XOR example          |" << std::endl;
     std::cout << "+-------------------------------+" << std::endl;
@@ -99,10 +102,10 @@ int main()
     // I1
     ann.setLink(0, 2, true);
     ann.setLink(0, 3, true);
-    // ann.setLink(0, 4, true);
+    ann.setLink(0, 4, true);
 
     // I2
-    // ann.setLink(1, 2, true);
+    ann.setLink(1, 2, true);
     ann.setLink(1, 3, true);
     ann.setLink(1, 4, true);
 

@@ -22,9 +22,9 @@ std::string BackendC::getEquationOfNode(int nodeNumber,
                             str << "(((";
                             str << getEquationOfNode(i, linkTable, weights);
                             str << ")";
-                            str << " > " << _ann.getNodeThreshold(nodeNumber);
-                            str << ") ? " << _ann.getNodeMax(nodeNumber);
-                            str << " : " << _ann.getNodeMin(nodeNumber);
+                            str << " > " << _ann.getNodeThreshold(nodeNumber) << ".f";
+                            str << ") ? " << _ann.getNodeMax(nodeNumber) << ".f";
+                            str << " : " << _ann.getNodeMin(nodeNumber) << ".f";
                             str << ")";
                             str << " * ";
                             str << weights[i][nodeNumber];

@@ -5,6 +5,16 @@
 
 const float Z3Equation::E = 2.71828182846f;
 
+z3::expr ite(z3::expr const & c, z3::expr const & t, z3::expr const & e)
+{
+  check_context(c, t); check_context(c, e);
+  assert(c.is_bool());
+  Z3_ast r = Z3_mk_ite(c.ctx(), c, t, e);
+  c.check_error();
+  return z3::expr(c.ctx(), r);
+}
+
+
 // it's supposed to be no error in this function
 float &z3ann::getRealWeightFromName(const std::string &str)
     {

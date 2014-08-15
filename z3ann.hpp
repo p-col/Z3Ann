@@ -10,6 +10,8 @@
 # define DEFAULTPRECISION 10000
 # define TOINT(x, precision) ((int)(x * precision))
 
+z3::expr ite(z3::expr const & c, z3::expr const & t, z3::expr const & e);
+
 class LinkDescriptor
 {
 private:
@@ -314,7 +316,8 @@ public:
                     }
                 // FIXME : improve activation function
                 // sigmoid(&tmp) for instance;
-                tmp = ite(tmp > TOINT((_min + (_max - _min) / 2.f), _precision),  _context.real_val(TOINT(_max, _precision)),
+                tmp = ite(tmp > TOINT((_min + (_max - _min) / 2.f), _precision),
+			  _context.real_val(TOINT(_max, _precision)),
                           _context.real_val(TOINT(_min, _precision)));
                 if (!b)
                     *getNode(i) = tmp;
